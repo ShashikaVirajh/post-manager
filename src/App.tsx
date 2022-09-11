@@ -1,7 +1,7 @@
 const App = (): JSX.Element => {
   return (
     <>
-      <div>Hi Im the app</div>
+      <div>Hi</div>
     </>
   );
 };
