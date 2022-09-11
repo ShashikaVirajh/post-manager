@@ -1,7 +1,7 @@
 import React from 'react';
 import { Test } from 'components/test.component';
 
-const App = () => {
+const App = (): JSX.Element => {
   return (
     <>
       <div>Hi Im the app</div>
