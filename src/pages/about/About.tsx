@@ -1,3 +1,3 @@
-const About = (): JSX.Element => <div>About</div>;
+const About = (): JSX.Element => <h1>About</h1>;
 
 export default About;
