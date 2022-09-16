@@ -1,16 +1,17 @@
 import { Button } from '@mui/material';
+import { COMMON_ROUTES, POST_ROUTES } from 'enums/routes.enums';
 import { Link, useNavigate } from 'react-router-dom';
 
 export const HeaderLoggedIn = (): JSX.Element => {
   const navigate = useNavigate();
 
   const handleLogout = (): void => {
-    navigate('/');
+    navigate(COMMON_ROUTES.HOME_PAGE);
   };
 
   return (
     <>
-      <Link style={styles.linkContainer} to={'/create-post'}>
+      <Link style={styles.linkContainer} to={POST_ROUTES.CREATE_POST}>
         Create Post
       </Link>
 
