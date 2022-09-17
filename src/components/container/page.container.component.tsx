@@ -1,4 +1,4 @@
-import { Container } from '@mui/material';
+import { Grid } from '@mui/material';
 import { Box } from '@mui/system';
 import { Footer } from 'components/footer/footer.component';
 import { Header } from 'components/header/header.component';
@@ -18,7 +18,9 @@ export const PageContainor: FC<Props> = ({ children, title }): JSX.Element => {
   return (
     <Box>
       <Header />
-      <Container style={styles.mainContainer}>{children}</Container>
+      <Grid container style={styles.mainContainer}>
+        {children}
+      </Grid>
       <Footer />
     </Box>
   );
@@ -26,7 +28,8 @@ export const PageContainor: FC<Props> = ({ children, title }): JSX.Element => {
 
 const styles = {
   mainContainer: {
-    marginTop: '5rem',
-    padding: '3rem',
+    height: '94vh',
+    paddingTop: '4rem',
+    alignItems: 'center',
   },
 };
