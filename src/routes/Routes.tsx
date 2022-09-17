@@ -5,13 +5,13 @@ import EditPost from 'components/post/edit-post.component';
 import DetailedPost from 'components/post/detailed-post.component';
 import Profile from 'components/profile/profile.component';
 import Home from 'pages/home/home.page';
-import About from 'pages/about/about.page';
-import Terms from 'pages/terms/terms.page';
+import { About } from 'pages/about/about.page';
+import { Terms } from 'pages/terms/terms.page';
 import { COMMON_ROUTES, POST_ROUTES, PROFILE_ROUTES } from 'enums/routes.enums';
 import { HomeGuest } from 'pages/home-guest/home-guest.page';
 
 const Routers = (): JSX.Element => {
-  const loggedIn = false;
+  const loggedIn = true;
   return (
     <BrowserRouter>
       <Routes>
