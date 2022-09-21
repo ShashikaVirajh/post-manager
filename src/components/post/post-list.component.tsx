@@ -1,3 +1,3 @@
-const PostList = (): JSX.Element => <div>PostList</div>;
+const PostList = (): JSX.Element => <div></div>;
 
 export default PostList;
