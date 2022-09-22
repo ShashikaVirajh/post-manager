@@ -5,7 +5,7 @@ import { HeaderLoggedIn } from './header-logged-in.component';
 import { HeaderLoggedOut } from './header-logged-out.component';
 
 export const Header = (): JSX.Element => {
-  const loggedIn = true;
+  const loggedIn = false;
   const font = '"Roboto","Helvetica","Arial"';
 
   return (
