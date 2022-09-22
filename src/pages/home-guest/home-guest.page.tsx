@@ -1,15 +1,20 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+import { ChangeEvent, SyntheticEvent, useState } from 'react';
 import { Box, Button, Grid, TextField, Typography } from '@mui/material';
 import { PageContainor } from 'components/container/page.container.component';
 import Axios from 'axios';
 
 export const HomeGuest = (): JSX.Element => {
-  const handleSubmit = async (e: React.SyntheticEvent): Promise<void> => {
+  const [username, setUserName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPossword] = useState('');
+  const handleSubmit = async (e: SyntheticEvent): Promise<void> => {
     e.preventDefault();
     try {
       await Axios.post('http://localhost:8080/register', {
-        username: 'test',
-        email: 'test@gmail.com',
-        password: '12wnmikjhdlo',
+        username,
+        email,
+        password,
       });
     } catch (error) {
       // console.log(error);
@@ -32,6 +37,7 @@ export const HomeGuest = (): JSX.Element => {
           <form onSubmit={handleSubmit}>
             <Box>
               <TextField
+                onChange={(event: ChangeEvent<HTMLInputElement>) => setUserName(event.target.value)}
                 fullWidth
                 id="username-register"
                 name="username"
@@ -42,6 +48,7 @@ export const HomeGuest = (): JSX.Element => {
 
             <Box>
               <TextField
+                onChange={(event: ChangeEvent<HTMLInputElement>) => setEmail(event.target.value)}
                 fullWidth
                 id="email-register"
                 name="email"
@@ -52,6 +59,7 @@ export const HomeGuest = (): JSX.Element => {
 
             <Box>
               <TextField
+                onChange={(event: ChangeEvent<HTMLInputElement>) => setPossword(event.target.value)}
                 fullWidth
                 id="password-register"
                 name="password"
