@@ -11,7 +11,7 @@ import { COMMON_ROUTES, POST_ROUTES, PROFILE_ROUTES } from 'enums/routes.enums';
 import { HomeGuest } from 'pages/home-guest/home-guest.page';
 
 const Routers = (): JSX.Element => {
-  const loggedIn = true;
+  const loggedIn = false;
   return (
     <BrowserRouter>
       <Routes>
