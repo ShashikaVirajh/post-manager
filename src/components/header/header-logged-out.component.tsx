@@ -14,10 +14,13 @@ export const HeaderLoggedOut = ({ setLoggedIn }: Props): JSX.Element => {
   const handleSubmit = async (e: SyntheticEvent): Promise<void> => {
     e.preventDefault();
     try {
-      await Axios.post('http://localhost:8080/login', {
+      const response = await Axios.post('http://localhost:8080/login', {
         username,
         password,
       });
+      localStorage.setItem('postManagerToken', response.data.token);
+      localStorage.setItem('postManagerUsername', response.data.username);
+      localStorage.setItem('postManagerAvatar', response.data.avatar);
       setLoggedIn(true);
     } catch (error) {
       // console.log(error);

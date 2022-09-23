@@ -7,7 +7,7 @@ import { HeaderLoggedOut } from './header-logged-out.component';
 
 export const Header = (): JSX.Element => {
   const font = '"Roboto","Helvetica","Arial"';
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(Boolean(localStorage.getItem('postManagerToken')));
 
   return (
     <AppBar>
