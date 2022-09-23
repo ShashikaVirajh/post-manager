@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { AppBar, Grid } from '@mui/material';
 import { COMMON_ROUTES } from 'enums/routes.enums';
 import { Link } from 'react-router-dom';
@@ -5,8 +6,8 @@ import { HeaderLoggedIn } from './header-logged-in.component';
 import { HeaderLoggedOut } from './header-logged-out.component';
 
 export const Header = (): JSX.Element => {
-  const loggedIn = false;
   const font = '"Roboto","Helvetica","Arial"';
+  const [loggedIn, setLoggedIn] = useState(false);
 
   return (
     <AppBar>
@@ -38,7 +39,11 @@ export const Header = (): JSX.Element => {
         </Grid>
 
         <Grid item xs={9} display="flex" alignItems="center" justifyContent="flex-end" px="4rem">
-          {loggedIn ? <HeaderLoggedIn /> : <HeaderLoggedOut />}
+          {loggedIn ? (
+            <HeaderLoggedIn setLoggedIn={setLoggedIn} />
+          ) : (
+            <HeaderLoggedOut setLoggedIn={setLoggedIn} />
+          )}
         </Grid>
       </Grid>
     </AppBar>

@@ -1,21 +1,20 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Button } from '@mui/material';
-import { COMMON_ROUTES, POST_ROUTES } from 'enums/routes.enums';
-import { Link, useNavigate } from 'react-router-dom';
+import { POST_ROUTES } from 'enums/routes.enums';
+import { Link } from 'react-router-dom';
 
-export const HeaderLoggedIn = (): JSX.Element => {
-  const navigate = useNavigate();
+type Props = {
+  setLoggedIn: (status: boolean) => void;
+};
 
-  const handleLogout = (): void => {
-    navigate(COMMON_ROUTES.HOME_PAGE);
-  };
-
+export const HeaderLoggedIn = ({ setLoggedIn }: Props): JSX.Element => {
   return (
     <>
       <Link style={styles.linkContainer} to={POST_ROUTES.CREATE_POST}>
         Create Post
       </Link>
 
-      <Button onClick={handleLogout} sx={styles.btn}>
+      <Button onClick={() => setLoggedIn(false)} sx={styles.btn}>
         Sign Out
       </Button>
     </>
