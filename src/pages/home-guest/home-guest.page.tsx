@@ -11,7 +11,7 @@ export const HomeGuest = (): JSX.Element => {
   const handleSubmit = async (e: SyntheticEvent): Promise<void> => {
     e.preventDefault();
     try {
-      await Axios.post('http://localhost:8080/register', {
+      await Axios.post('/register', {
         username,
         email,
         password,
