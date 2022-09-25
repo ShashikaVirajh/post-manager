@@ -4,8 +4,12 @@ import { Link } from 'react-router-dom';
 import { HeaderLoggedIn } from './header-logged-in.component';
 import { HeaderLoggedOut } from './header-logged-out.component';
 
-export const Header = (): JSX.Element => {
-  const loggedIn = false;
+type Props = {
+  setLoggedIn: (status: boolean) => void;
+  loggedIn: boolean;
+};
+
+export const Header = ({ loggedIn, setLoggedIn }: Props): JSX.Element => {
   const font = '"Roboto","Helvetica","Arial"';
 
   return (
@@ -38,7 +42,11 @@ export const Header = (): JSX.Element => {
         </Grid>
 
         <Grid item xs={9} display="flex" alignItems="center" justifyContent="flex-end" px="4rem">
-          {loggedIn ? <HeaderLoggedIn /> : <HeaderLoggedOut />}
+          {loggedIn ? (
+            <HeaderLoggedIn setLoggedIn={setLoggedIn} />
+          ) : (
+            <HeaderLoggedOut setLoggedIn={setLoggedIn} />
+          )}
         </Grid>
       </Grid>
     </AppBar>

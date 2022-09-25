@@ -3,18 +3,25 @@ import { Button, Grid, Input } from '@mui/material';
 import Axios from 'axios';
 import { ChangeEvent, SyntheticEvent, useState } from 'react';
 
-export const HeaderLoggedOut = (): JSX.Element => {
+type Props = {
+  setLoggedIn: (status: boolean) => void;
+};
+
+export const HeaderLoggedOut = ({ setLoggedIn }: Props): JSX.Element => {
   const [username, setUserName] = useState('');
   const [password, setPossword] = useState('');
 
   const handleSubmit = async (e: SyntheticEvent): Promise<void> => {
     e.preventDefault();
     try {
-      await Axios.post('http://localhost:8080/login', {
+      const response = await Axios.post('/login', {
         username,
         password,
       });
-      // console.log(response.data);
+      localStorage.setItem('postManagerToken', response.data.token);
+      localStorage.setItem('postManagerUsername', response.data.username);
+      localStorage.setItem('postManagerAvatar', response.data.avatar);
+      setLoggedIn(true);
     } catch (error) {
       // console.log(error);
     }
@@ -22,7 +29,7 @@ export const HeaderLoggedOut = (): JSX.Element => {
 
   return (
     <Grid container display="flex" justifyContent="flex-end" flexDirection="row">
-      <form onChange={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <Input
           onChange={(event: ChangeEvent<HTMLInputElement>) => setUserName(event.target.value)}
           style={styles.inputContainer}

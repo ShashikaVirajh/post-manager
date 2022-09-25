@@ -9,11 +9,16 @@ import { About } from 'pages/about/about.page';
 import { Terms } from 'pages/terms/terms.page';
 import { COMMON_ROUTES, POST_ROUTES, PROFILE_ROUTES } from 'enums/routes.enums';
 import { HomeGuest } from 'pages/home-guest/home-guest.page';
+import { useState } from 'react';
+import { Header } from 'components/header/header.component';
+import { Footer } from 'components/footer/footer.component';
 
 const Routers = (): JSX.Element => {
-  const loggedIn = false;
+  const [loggedIn, setLoggedIn] = useState(Boolean(localStorage.getItem('postManagerToken')));
+
   return (
     <BrowserRouter>
+      <Header loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
       <Routes>
         <Route path={PROFILE_ROUTES.PROFILE} element={<Profile />} />
         <Route path={POST_ROUTES.DETAILED_POST} element={<DetailedPost />} />
@@ -24,6 +29,7 @@ const Routers = (): JSX.Element => {
         <Route path={COMMON_ROUTES.TERM_PAGE} element={<Terms />} />
         <Route path={COMMON_ROUTES.HOME_PAGE} element={loggedIn ? <Home /> : <HomeGuest />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 };

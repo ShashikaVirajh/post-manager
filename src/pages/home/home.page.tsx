@@ -6,7 +6,8 @@ const Home = (): JSX.Element => (
     <PageContainor title={'Your Feed'}>
       <Box display="flex" flexDirection="column" justifyContent="center">
         <Typography variant="h3" display="flex" justifyContent="center">
-          Hello <strong>nim</strong>, your feed is empty.
+          Hello&nbsp;<strong>{localStorage.getItem('postManagerUsername')}</strong>, your feed is
+          empty.
         </Typography>
         <Box style={styles.boxConatiner}>
           <Typography>
