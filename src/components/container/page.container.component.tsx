@@ -1,7 +1,5 @@
 import { Grid } from '@mui/material';
 import { Box } from '@mui/system';
-import { Footer } from 'components/footer/footer.component';
-import { Header } from 'components/header/header.component';
 import { FC, useEffect } from 'react';
 
 type Props = {
@@ -17,11 +15,9 @@ export const PageContainor: FC<Props> = ({ children, title }): JSX.Element => {
 
   return (
     <Box>
-      <Header />
       <Grid container style={styles.mainContainer}>
         {children}
       </Grid>
-      <Footer />
     </Box>
   );
 };

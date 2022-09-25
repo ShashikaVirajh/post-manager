@@ -1,13 +1,16 @@
-import { useState } from 'react';
 import { AppBar, Grid } from '@mui/material';
 import { COMMON_ROUTES } from 'enums/routes.enums';
 import { Link } from 'react-router-dom';
 import { HeaderLoggedIn } from './header-logged-in.component';
 import { HeaderLoggedOut } from './header-logged-out.component';
 
-export const Header = (): JSX.Element => {
+type Props = {
+  setLoggedIn: (status: boolean) => void;
+  loggedIn: boolean;
+};
+
+export const Header = ({ loggedIn, setLoggedIn }: Props): JSX.Element => {
   const font = '"Roboto","Helvetica","Arial"';
-  const [loggedIn, setLoggedIn] = useState(Boolean(localStorage.getItem('postManagerToken')));
 
   return (
     <AppBar>
