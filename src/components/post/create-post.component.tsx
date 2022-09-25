@@ -3,18 +3,21 @@ import { Box, Button, Grid, TextField } from '@mui/material';
 import { PageContainor } from 'components/container/page.container.component';
 import Axios from 'axios';
 import { ChangeEvent, SyntheticEvent, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export const CreatePost = (): JSX.Element => {
+  const navigate = useNavigate();
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
   const handleSubmit = async (e: SyntheticEvent): Promise<void> => {
     e.preventDefault();
     try {
-      await Axios.post('/create-post', {
+      const response = await Axios.post('/create-post', {
         title,
         body,
         token: localStorage.getItem('postManagerToken'),
       });
+      navigate(`/post/${response.data}`);
     } catch (error) {
       // console.log(error);
     }
