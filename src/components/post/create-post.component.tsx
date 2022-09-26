@@ -2,13 +2,16 @@
 import { Box, Button, Grid, TextField } from '@mui/material';
 import { PageContainor } from 'components/container/page.container.component';
 import Axios from 'axios';
-import { ChangeEvent, SyntheticEvent, useState } from 'react';
+import { ChangeEvent, SyntheticEvent, useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { MessageContext } from 'contexts/message.context';
 
 export const CreatePost = (): JSX.Element => {
   const navigate = useNavigate();
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
+  const { addMessage } = useContext(MessageContext);
+
   const handleSubmit = async (e: SyntheticEvent): Promise<void> => {
     e.preventDefault();
     try {
@@ -17,6 +20,8 @@ export const CreatePost = (): JSX.Element => {
         body,
         token: localStorage.getItem('postManagerToken'),
       });
+
+      addMessage('Congrats, you successfully created a post.');
       navigate(`/post/${response.data}`);
     } catch (error) {
       // console.log(error);

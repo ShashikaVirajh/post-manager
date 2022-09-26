@@ -1,5 +1,6 @@
 import { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
+import { MessageProvider } from 'contexts/message.context';
 
 import App from './App';
 
@@ -8,6 +9,8 @@ const root = ReactDOM.createRoot(container);
 
 root.render(
   <StrictMode>
-    <App />
+    <MessageProvider>
+      <App />
+    </MessageProvider>
   </StrictMode>,
 );
