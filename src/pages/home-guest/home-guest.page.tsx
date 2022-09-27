@@ -1,24 +1,19 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { ChangeEvent, SyntheticEvent, useState } from 'react';
+import { ChangeEvent, SyntheticEvent, useContext, useState } from 'react';
 import { Box, Button, Grid, TextField, Typography } from '@mui/material';
 import { PageContainor } from 'components/container/page.container.component';
-import Axios from 'axios';
+import { singOut } from 'contexts/auth/auth.service';
+import { MessageContext } from 'contexts/message.context';
 
 export const HomeGuest = (): JSX.Element => {
   const [username, setUserName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPossword] = useState('');
+  const { addMessage } = useContext(MessageContext);
   const handleSubmit = async (e: SyntheticEvent): Promise<void> => {
     e.preventDefault();
-    try {
-      await Axios.post('/register', {
-        username,
-        email,
-        password,
-      });
-    } catch (error) {
-      // console.log(error);
-    }
+    await singOut(username, email, password);
+    addMessage('Congrats! Welcome to your new account.');
   };
 
   return (

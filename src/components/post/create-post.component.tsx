@@ -1,12 +1,13 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Box, Button, Grid, TextField } from '@mui/material';
 import { PageContainor } from 'components/container/page.container.component';
-import Axios from 'axios';
 import { ChangeEvent, SyntheticEvent, useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { MessageContext } from 'contexts/message.context';
+import { addPost } from 'contexts/post/post.service';
 
 export const CreatePost = (): JSX.Element => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const navigate = useNavigate();
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
@@ -14,18 +15,9 @@ export const CreatePost = (): JSX.Element => {
 
   const handleSubmit = async (e: SyntheticEvent): Promise<void> => {
     e.preventDefault();
-    try {
-      const response = await Axios.post('/create-post', {
-        title,
-        body,
-        token: localStorage.getItem('postManagerToken'),
-      });
-
-      addMessage('Congrats, you successfully created a post.');
-      navigate(`/post/${response.data}`);
-    } catch (error) {
-      // console.log(error);
-    }
+    await addPost(title, body);
+    addMessage('Congrats, you successfully created a post.');
+    // navigate(`/post/${response.data}`);
   };
 
   return (
