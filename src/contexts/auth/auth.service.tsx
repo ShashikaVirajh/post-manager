@@ -6,6 +6,7 @@ export const signIn = async (username: string, password: string): Promise<void> 
       username,
       password,
     });
+
     localStorage.setItem('postManagerToken', data?.token);
     localStorage.setItem('postManagerUsername', data?.username);
     localStorage.setItem('postManagerAvatar', data?.avatar);

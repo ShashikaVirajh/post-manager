@@ -1,5 +1,5 @@
 import { createContext, ReactNode } from 'react';
-import { addPost } from './post.service';
+import { addPost, authUserPost } from './post.service';
 
 type Props = {
   children: ReactNode;
@@ -7,10 +7,12 @@ type Props = {
 
 type TPostContext = {
   addPost: (title: string, body: string) => void;
+  authUserPost: () => any;
 };
 
 const defaultValues: TPostContext = {
-  addPost: (itle: string, body: string) => null,
+  addPost: (title: string, body: string) => null,
+  authUserPost: () => null,
 };
 
 export const PostContext = createContext(defaultValues);
@@ -18,6 +20,7 @@ export const PostContext = createContext(defaultValues);
 export const PostProvider = ({ children }: Props): JSX.Element => {
   const value = {
     addPost,
+    authUserPost,
   };
 
   return <PostContext.Provider value={value}>{children}</PostContext.Provider>;

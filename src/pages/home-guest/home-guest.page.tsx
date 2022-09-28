@@ -2,14 +2,16 @@
 import { ChangeEvent, SyntheticEvent, useContext, useState } from 'react';
 import { Box, Button, Grid, TextField, Typography } from '@mui/material';
 import { PageContainor } from 'components/container/page.container.component';
-import { singOut } from 'contexts/auth/auth.service';
 import { MessageContext } from 'contexts/message.context';
+import { AuthContext } from 'contexts/auth/auth.context';
 
 export const HomeGuest = (): JSX.Element => {
   const [username, setUserName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPossword] = useState('');
   const { addMessage } = useContext(MessageContext);
+  const { singOut } = useContext(AuthContext);
+
   const handleSubmit = async (e: SyntheticEvent): Promise<void> => {
     e.preventDefault();
     await singOut(username, email, password);

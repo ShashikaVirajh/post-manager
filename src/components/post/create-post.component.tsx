@@ -4,7 +4,7 @@ import { PageContainor } from 'components/container/page.container.component';
 import { ChangeEvent, SyntheticEvent, useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { MessageContext } from 'contexts/message.context';
-import { addPost } from 'contexts/post/post.service';
+import { PostContext } from 'contexts/post/post.context';
 
 export const CreatePost = (): JSX.Element => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -12,12 +12,13 @@ export const CreatePost = (): JSX.Element => {
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
   const { addMessage } = useContext(MessageContext);
+  const { addPost } = useContext(PostContext);
 
   const handleSubmit = async (e: SyntheticEvent): Promise<void> => {
     e.preventDefault();
-    await addPost(title, body);
+    const data = await addPost(title, body);
     addMessage('Congrats, you successfully created a post.');
-    // navigate(`/post/${response.data}`);
+    navigate(`/post/${data}`);
   };
 
   return (

@@ -5,7 +5,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 const DetailedPost = (): JSX.Element => (
-  <PageContainor title="Create New Post">
+  <PageContainor title="Detail Of Post">
     <Box>
       <Box display="flex" flexDirection="column" style={styles.headerConatiner}>
         <Box display="flex" flexDirection="row">

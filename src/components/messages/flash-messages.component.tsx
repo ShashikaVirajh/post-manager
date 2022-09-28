@@ -7,20 +7,17 @@ type Props = {
 };
 
 export const FlashMessages: FC<Props> = ({ message }): JSX.Element | null => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
-    const timeId = setTimeout(() => {
+    setShow(true);
+
+    setTimeout(() => {
       setShow(false);
     }, 3000);
+  }, [message]);
 
-    return () => {
-      clearTimeout(timeId);
-    };
-  }, []);
-
-  return message ? (
+  return show && message ? (
     <Alert style={styles.container} severity="success">
       {message}
     </Alert>
@@ -29,6 +26,7 @@ export const FlashMessages: FC<Props> = ({ message }): JSX.Element | null => {
 const styles = {
   container: {
     zIndex: 999,
-    marginTop: '6rem',
+    marginTop: '5rem',
+    alignSelf: 'center',
   },
 };
