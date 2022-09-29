@@ -80,6 +80,7 @@
     "prefer-template": "error",
     "quote-props": ["error", "as-needed"],
     "radix": "error",
+    "react-hooks/exhaustive-deps": "off",
     "sort-imports": [
       "warn",
       {

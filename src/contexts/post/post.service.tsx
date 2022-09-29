@@ -1,10 +1,5 @@
 import Axios from 'axios';
-
-type TPost = {
-  postId: number;
-  postTitle: string;
-  postBody: string;
-};
+import { TPost, TPostList } from 'types/post.types';
 
 export const addPost = async (title: string, body: string): Promise<string> => {
   try {
@@ -20,10 +15,19 @@ export const addPost = async (title: string, body: string): Promise<string> => {
   }
 };
 
-export const authUserPost = async (): Promise<TPost[]> => {
+export const getAuthUserPost = async (): Promise<TPostList[]> => {
   const username = localStorage.getItem('postManagerUsername');
   try {
     const { data } = await Axios.get(`/profile/${username}/posts`);
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getPostDetail = async (id: string): Promise<TPost | null> => {
+  try {
+    const { data } = await Axios.get(`/post/${id}`);
     return data;
   } catch (error) {
     throw error;
