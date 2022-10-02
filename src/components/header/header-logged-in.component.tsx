@@ -27,7 +27,7 @@ export const HeaderLoggedIn = ({ setLoggedIn }: Props): JSX.Element => {
       <Link style={styles.linkContainer} to={POST_ROUTES.CREATE_POST}>
         Create Post
       </Link>
-      <Link to={PROFILE_ROUTES.PROFILE}>
+      <Link to={`${PROFILE_ROUTES.PROFILE}/${localStorage.getItem('postManagerUsername')}`}>
         <Avatar alt="Remy Sharp" src={localStorage.getItem('postManagerAvatar') ?? ''} />
       </Link>
       <Button onClick={handleLogout} sx={styles.btn}>

@@ -33,3 +33,13 @@ export const getPostDetail = async (id: string): Promise<TPost | null> => {
     throw error;
   }
 };
+
+export const deletePost = async (id: string): Promise<void> => {
+  try {
+    await Axios.delete(`/post/${id}`, {
+      data: { token: localStorage.getItem('postManagerToken') },
+    });
+  } catch (error) {
+    throw error;
+  }
+};

@@ -1,5 +1,5 @@
 export enum PROFILE_ROUTES {
-  PROFILE = '/profile/:username/*',
+  PROFILE = '/profile',
 }
 
 export enum POST_ROUTES {
