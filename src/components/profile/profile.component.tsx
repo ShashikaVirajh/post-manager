@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Avatar, Box, Button, Grid, List, ListItem, Tab, Tabs } from '@mui/material';
+import { Avatar, Box, Button, Grid, List, Tab, Tabs } from '@mui/material';
 import TabContext from '@mui/lab/TabContext';
 import TabPanel from '@mui/lab/TabPanel';
 import { useState } from 'react';
 import { PageContainor } from 'components/container/page.container.component';
+import { PostList } from '../post/posts-list.component';
 
 export const Profile = (): JSX.Element => {
   const [value, setValue] = useState('1');
@@ -32,38 +33,7 @@ export const Profile = (): JSX.Element => {
 
             <TabPanel value="1">
               <List>
-                <ListItem>
-                  <Box display="flex" flexDirection="row">
-                    <Avatar
-                      alt="Remy Sharp"
-                      src="https://gravatar.com/avatar/b9408a09298632b5151200f3449434ef?s=128"
-                    />
-                    <Box sx={styles.postDetail}>
-                      <strong>Example Post #1</strong>
-                      <span>on 2/10/2020 </span>
-                    </Box>
-                  </Box>
-                </ListItem>
-                <ListItem>
-                  <Avatar
-                    alt="Remy Sharp"
-                    src="https://gravatar.com/avatar/b9408a09298632b5151200f3449434ef?s=128"
-                  />
-                  <Box sx={styles.postDetail}>
-                    <strong>Example Post #2</strong>
-                    <span>on 2/10/2020 </span>
-                  </Box>
-                </ListItem>
-                <ListItem alignItems="flex-start">
-                  <Avatar
-                    alt="Remy Sharp"
-                    src="https://gravatar.com/avatar/b9408a09298632b5151200f3449434ef?s=128"
-                  />
-                  <Box sx={styles.postDetail}>
-                    <strong>Example Post #3</strong>
-                    <span>on 2/10/2020 </span>
-                  </Box>
-                </ListItem>
+                <PostList />
               </List>
             </TabPanel>
             <TabPanel value="2">No Followers</TabPanel>

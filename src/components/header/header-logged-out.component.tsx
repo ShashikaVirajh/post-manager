@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Button, Grid, Input } from '@mui/material';
-import Axios from 'axios';
-import { ChangeEvent, SyntheticEvent, useState } from 'react';
+import { ChangeEvent, SyntheticEvent, useContext, useState } from 'react';
+import { MessageContext } from 'contexts/message.context';
+import { AuthContext } from 'contexts/auth/auth.context';
 
 type Props = {
   setLoggedIn: (status: boolean) => void;
@@ -10,21 +11,16 @@ type Props = {
 export const HeaderLoggedOut = ({ setLoggedIn }: Props): JSX.Element => {
   const [username, setUserName] = useState('');
   const [password, setPossword] = useState('');
+  const { addMessage } = useContext(MessageContext);
+  const { signIn } = useContext(AuthContext);
 
   const handleSubmit = async (e: SyntheticEvent): Promise<void> => {
     e.preventDefault();
-    try {
-      const response = await Axios.post('/login', {
-        username,
-        password,
-      });
-      localStorage.setItem('postManagerToken', response.data.token);
-      localStorage.setItem('postManagerUsername', response.data.username);
-      localStorage.setItem('postManagerAvatar', response.data.avatar);
-      setLoggedIn(true);
-    } catch (error) {
-      // console.log(error);
-    }
+
+    await signIn(username, password);
+
+    setLoggedIn(true);
+    addMessage('You have successfully logged in.');
   };
 
   return (
