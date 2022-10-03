@@ -7,7 +7,6 @@ import { MessageContext } from 'contexts/message.context';
 import { PostContext } from 'contexts/post/post.context';
 
 export const CreatePost = (): JSX.Element => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const navigate = useNavigate();
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');

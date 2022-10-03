@@ -27,7 +27,7 @@ const DetailedPost = (): JSX.Element => {
   const deleteHandler = async (): Promise<void> => {
     const areYouSure = window.confirm('Do you really want to delete this post?');
     if (areYouSure) {
-      deletePost(postId);
+      await deletePost(postId);
       addMessage('Post was successfully deleted.');
       navigate(`/profile/${post?.author.username}`);
     }
