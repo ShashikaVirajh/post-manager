@@ -1,15 +1,20 @@
 import { Avatar, Box, Typography } from '@mui/material';
 import { PageContainor } from 'components/container/page.container.component';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { getPostDetail } from 'contexts/post/post.service';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { TPost } from 'types/post.types';
+import { MessageContext } from 'contexts/message.context';
+import { PROFILE_ROUTES } from 'enums/routes.enums';
+import { PostContext } from 'contexts/post/post.context';
 
 const DetailedPost = (): JSX.Element => {
   const postId = useParams().id ?? '';
   const [post, setPost] = useState<TPost | null>();
+  const { addMessage } = useContext(MessageContext);
+  const { deletePost, getPostDetail } = useContext(PostContext);
+  const navigate = useNavigate();
 
   const getPost = async (): Promise<void> => {
     const post = await getPostDetail(postId);
@@ -20,6 +25,15 @@ const DetailedPost = (): JSX.Element => {
     getPost();
   }, []);
 
+  const deleteHandler = async (): Promise<void> => {
+    const areYouSure = window.confirm('Do you really want to delete this post?');
+    if (areYouSure) {
+      await deletePost(postId);
+      addMessage('Post was successfully deleted.');
+      navigate(`/profile/${post?.author.username}`);
+    }
+  };
+
   return (
     <PageContainor title="Detail Of Post">
       <Box>
@@ -27,33 +41,34 @@ const DetailedPost = (): JSX.Element => {
           <Box display="flex" flexDirection="row">
             <Typography variant="h3">{post?.title}</Typography>
             <Box style={styles.iconConatiner}>
-              <Link to={''} title="Edit">
+              <Link to={`/post/${postId}/edit`} title="Edit">
                 <EditIcon></EditIcon>
               </Link>{' '}
               <Link to={''} title="Delete">
-                <DeleteIcon></DeleteIcon>
+                <DeleteIcon onClick={deleteHandler}></DeleteIcon>
               </Link>
             </Box>
           </Box>
 
           <Box display="flex" flexDirection="row">
-            <Link to={''}>
-              <Avatar alt="Remy Sharp" src={localStorage.getItem('postManagerAvatar') ?? ''} />
+            <Link to={`${PROFILE_ROUTES.PROFILE}/${post?.author.username}`}>
+              <Avatar alt="Remy Sharp" src={post?.author.avatar ?? ''} />
             </Link>
             <Box sx={styles.postDetail}>
-              Posted by <Link to={''}>brad</Link> on 2/10/2020
+              Posted by
+              <strong>
+                {' '}
+                <Link style={styles.link} to={`/profile/${post?.author.username}`}>
+                  {post?.author.username}
+                </Link>
+              </strong>{' '}
+              on 2/10/2020
             </Box>
           </Box>
         </Box>
 
         <Box style={styles.boxConatiner}>
-          <Box>
-            Lorem isum dolor sit amet consectetur adipisicing elit. Beatae quod asperiores corrupti
-            omnis qui, placeat neque modi, dignissimos, ab exercitationem eligendi culpa explicabo
-            nulla tempora rem? Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure ea at
-            esse, tempore qui possimus soluta impedit natus voluptate, sapiente saepe modi est
-            pariatur. Aut voluptatibus aspernatur fugiat asperiores at.
-          </Box>
+          <Box>{post?.body}</Box>
         </Box>
       </Box>
     </PageContainor>
@@ -84,5 +99,8 @@ const styles = {
   iconConatiner: {
     paddingLeft: '5rem',
     paddingTop: '1rem',
+  },
+  link: {
+    textDecoration: 'none',
   },
 };

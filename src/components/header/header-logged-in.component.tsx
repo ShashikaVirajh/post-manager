@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Avatar, Button } from '@mui/material';
 import { MessageContext } from 'contexts/message.context';
-import { COMMON_ROUTES, POST_ROUTES, PROFILE_ROUTES } from 'enums/routes.enums';
+import { COMMON_ROUTES, POST_ROUTES } from 'enums/routes.enums';
 import { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -27,7 +27,7 @@ export const HeaderLoggedIn = ({ setLoggedIn }: Props): JSX.Element => {
       <Link style={styles.linkContainer} to={POST_ROUTES.CREATE_POST}>
         Create Post
       </Link>
-      <Link to={PROFILE_ROUTES.PROFILE}>
+      <Link to={`/profile/${localStorage.getItem('postManagerUsername')}`}>
         <Avatar alt="Remy Sharp" src={localStorage.getItem('postManagerAvatar') ?? ''} />
       </Link>
       <Button onClick={handleLogout} sx={styles.btn}>
