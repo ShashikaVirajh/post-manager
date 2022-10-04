@@ -1,5 +1,5 @@
 import Axios from 'axios';
-import { TPost, TPostList } from 'types/post.types';
+import { TEditPayloadType, TPost, TPostList } from 'types/post.types';
 
 export const addPost = async (title: string, body: string): Promise<string> => {
   try {
@@ -38,6 +38,18 @@ export const deletePost = async (id: string): Promise<void> => {
   try {
     await Axios.delete(`/post/${id}`, {
       data: { token: localStorage.getItem('postManagerToken') },
+    });
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const editPost = async (payload: TEditPayloadType): Promise<void> => {
+  try {
+    await Axios.post(`/post/${payload.id}/edit`, {
+      title: payload.title,
+      body: payload.body,
+      token: localStorage.getItem('postManagerToken'),
     });
   } catch (error) {
     throw error;

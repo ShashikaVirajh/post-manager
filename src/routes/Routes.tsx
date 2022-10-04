@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import NotFound from 'components/not-founds/not-found.component';
 import { CreatePost } from 'components/post/create-post.component';
-import EditPost from 'components/post/edit-post.component';
+import { EditPost } from 'components/post/edit-post.component';
 import DetailedPost from 'components/post/detailed-post.component';
 import { Profile } from 'components/profile/profile.component';
 import Home from 'pages/home/home.page';

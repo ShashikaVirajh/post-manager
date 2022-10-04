@@ -3,16 +3,17 @@ import { PageContainor } from 'components/container/page.container.component';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { deletePost, getPostDetail } from 'contexts/post/post.service';
 import { useContext, useEffect, useState } from 'react';
 import { TPost } from 'types/post.types';
 import { MessageContext } from 'contexts/message.context';
 import { PROFILE_ROUTES } from 'enums/routes.enums';
+import { PostContext } from 'contexts/post/post.context';
 
 const DetailedPost = (): JSX.Element => {
   const postId = useParams().id ?? '';
   const [post, setPost] = useState<TPost | null>();
   const { addMessage } = useContext(MessageContext);
+  const { deletePost, getPostDetail } = useContext(PostContext);
   const navigate = useNavigate();
 
   const getPost = async (): Promise<void> => {

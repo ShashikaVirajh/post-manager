@@ -14,3 +14,9 @@ export type TAuthor = {
   username: string;
   avatar: string;
 };
+
+export type TEditPayloadType = {
+  id: string;
+  title: string | undefined;
+  body: string | undefined;
+};
